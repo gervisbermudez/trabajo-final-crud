@@ -1,7 +1,7 @@
 <?php
 include '../includes/config.php';
 
-$sql = "SELECT * FROM Cliente";
+$sql = "SELECT * FROM clientes";
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {

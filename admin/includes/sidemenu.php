@@ -10,15 +10,15 @@
                 <div class="sb-sidenav-menu-heading">Administrar</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                     aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                     Clientes
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="vistas/clientes.php">Ver Clientes</a>
-                        <a class="nav-link" href="layout-static.html">Crear Cliente</a>
+                        <a class="nav-link" href="/admin/vistas/clientes.php">Ver Clientes</a>
+                        <a class="nav-link" href="/admin/vistas/crear_cliente.php">Crear Cliente</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Modificar Cliente</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Borrar Cliente</a>
                     </nav>
