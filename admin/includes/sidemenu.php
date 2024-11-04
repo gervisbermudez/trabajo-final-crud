@@ -17,7 +17,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="layout-static.html">Ver Clientes</a>
+                        <a class="nav-link" href="vistas/clientes.php">Ver Clientes</a>
                         <a class="nav-link" href="layout-static.html">Crear Cliente</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Modificar Cliente</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Borrar Cliente</a>
