@@ -1,19 +1,34 @@
 <?php
-include '../includes/config.php';
+$delete_message = "";
 
+// Eliminar cliente
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $delete = $_GET && $_GET['delete'];
 
-    $sql = "DELETE FROM Cliente WHERE id_cliente = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    if ($delete) {
+        $id = $_GET['id'];
 
-    if ($stmt->execute()) {
-        echo "Cliente eliminado con éxito";
-    } else {
-        echo "Error al eliminar el cliente: " . $conn->error;
+        // Verificar si el cliente existe
+        $check_sql = "SELECT id_cliente FROM clientes WHERE id_cliente = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("i", $id);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            // El cliente existe, proceder a eliminar
+            $sql = "DELETE FROM clientes WHERE id_cliente = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $id);
+
+            if ($stmt->execute()) {
+                $delete_message = "Cliente eliminado con éxito";
+            } else {
+                $delete_message = "Error al eliminar el cliente: " . $conn->error;
+            }
+            $stmt->close();
+        }
+
+        $check_stmt->close();
     }
-
-    $stmt->close();
 }
-?>

@@ -1,6 +1,4 @@
 <?php
-include '../includes/config.php';
-
 $sql = "SELECT * FROM clientes";
 $result = $conn->query($sql);
 
@@ -14,7 +12,7 @@ if ($result && $result->num_rows > 0) {
         <td>" . $row['direccion'] . "</td>
         <td>
         <a href='actualizar_cliente.php?id=" . $row['id_cliente'] . "'>Editar</a> |
-        <a href='eliminar_cliente.php?id=" . $row['id_cliente'] . "'>Eliminar</a>
+        <a href='/admin/vistas/clientes.php?delete=true&id=" . $row['id_cliente'] . "'>Eliminar</a>
         </td>
         </tr>";
     }

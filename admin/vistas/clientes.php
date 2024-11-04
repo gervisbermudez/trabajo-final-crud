@@ -12,6 +12,9 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 $title = "Wonderland | Clientes";
 
+include '../includes/config.php';
+include "eliminar_cliente.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +34,12 @@ include "../includes/head.php";
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Administrar Clientes</li>
                     </ol>
+                    <?php if ($delete_message): ?>
+                    <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                        <?=$delete_message?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif?>
                     <!-- Botón para redirigir a crear cliente -->
                     <div class="text-right mb-3">
                         <a href="crear_cliente.php" class="btn btn-primary">Agregar Cliente</a>

@@ -52,7 +52,7 @@ include "../includes/head.php";
                     <h1 class="mt-4">Clientes</h1>
 
                     <?php if (isset($mensaje)): ?>
-                    <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?=$mensaje?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
