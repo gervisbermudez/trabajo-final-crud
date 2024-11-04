@@ -1,9 +1,22 @@
 <?php
+// Verifica si el administrador ha iniciado sesión, aquí puedes agregar tu lógica de sesión
+session_start();
+
+// Si no hay sesión de administrador activa, redirige a una página de login
+// Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
+// Ejemplo: si no hay sesión activa, redirigiría a "login.php"
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: ./login.php');
+    exit;
+}
+
+$title = "Wonderland | Clientes";
+
 include '../includes/config.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM Cliente WHERE id_cliente = ?";
+    $sql = "SELECT * FROM clientes WHERE id_cliente = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -11,79 +24,91 @@ if (isset($_GET['id'])) {
     $cliente = $result->fetch_assoc();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id_cliente'];
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $direccion = $_POST['direccion'];
+include "../includes/actualizar_cliente.php";
 
-    $sql = "UPDATE Cliente SET nombre = ?, email = ?, telefono = ?, direccion = ? WHERE id_cliente = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $nombre, $email, $telefono, $direccion, $id);
-
-    if ($stmt->execute()) {
-        $mensaje = "Cliente actualizado con éxito";
-    } else {
-        $mensaje = "Error al actualizar el cliente: " . $conn->error;
-    }
-
-    $stmt->close();
-}
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Cliente</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2 class="text-center">Actualizar Cliente</h2>
+<html lang="en">
+<?php
+include "../includes/head.php";
+?>
 
-        <!-- Mostrar mensaje de éxito o error -->
-        <?php if (isset($mensaje)): ?>
-            <div class="alert alert-info text-center">
-                <?php echo $mensaje; ?>
-            </div>
-        <?php endif; ?>
+<body class="sb-nav-fixed">
+    <?php include "../includes/nav.php";?>
+    <div id="layoutSidenav">
+        <?php include "../includes/sidemenu.php";?>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Clientes</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Administrar Clientes</li>
+                    </ol>
+                    <?php if (isset($mensaje) && $mensaje): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?=$mensaje?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif?>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fa-solid fa-users"></i>
+                            Agregar Cliente
+                        </div>
+                        <div class="card-body">
+                            <!-- Formulario para crear un cliente -->
+                            <form method="POST"
+                                action="actualizar_cliente.php?update=true&id=<?=$cliente['id_cliente'];?>" class="p-2">
+                                <input type="hidden" name="id_cliente" value="<?=$cliente['id_cliente'];?>">
 
-        <!-- Formulario para actualizar cliente -->
-        <form method="POST" action="">
-            <input type="hidden" name="id_cliente" value="<?php echo $cliente['id_cliente']; ?>">
+                                <div class="form-group mb-3">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                        value="<?=$cliente['nombre'];?>" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="apellido">Apellido:</label>
+                                    <input type="text" class="form-control" name="apellido" id="apellido"
+                                        value="<?=$cliente['apellido'];?>" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" value="<?=$cliente['email'];?>"
+                                        name="email" id="email" required>
+                                </div>
 
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" value="<?php echo $cliente['nombre']; ?>" required>
-            </div>
+                                <div class="form-group mb-3">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="text" class="form-control" value="<?=$cliente['telefono'];?>"
+                                        name="telefono" id="telefono">
+                                </div>
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" value="<?php echo $cliente['email']; ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="text" class="form-control" name="telefono" value="<?php echo $cliente['telefono']; ?>">
-            </div>
-
-            <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <textarea class="form-control" name="direccion"><?php echo $cliente['direccion']; ?></textarea>
-            </div>
-
-            <div class="text-right">
-                <input type="submit" class="btn btn-primary" value="Actualizar Cliente">
-                <a href="clientes.php" class="btn btn-secondary">Volver a la Lista</a>
-            </div>
-        </form>
+                                <div class="form-group mb-3">
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea class="form-control" name="direccion"
+                                        id="direccion"><?=$cliente['direccion'];?></textarea>
+                                </div>
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary"><i
+                                                class="fa-regular fa-pen-to-square"></i> Actualizar datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-right mb-2">
+                        <a href="clientes.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>
+                            Volver
+                            al listado</a>
+                    </div>
+                </div>
+            </main>
+            <?php include "../includes/footer.php";?>
+        </div>
     </div>
-
-    <!-- Opcionalmente, puedes incluir Bootstrap JS para funcionalidades como responsive design -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include "../includes/scripts.php";?>
 </body>
+
 </html>

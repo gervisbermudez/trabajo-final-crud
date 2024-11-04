@@ -13,26 +13,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderlan | Clientes";
 
 include '../includes/config.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $direccion = $_POST['direccion'];
-
-    $sql = "INSERT INTO clientes (nombre, apellido, email, telefono, direccion) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sssss', $nombre, $apellido, $email, $telefono, $direccion); // string, string, string, string, string
-
-    if ($stmt->execute()) {
-        $mensaje = "Cliente creado con éxito";
-    } else {
-        $mensaje = "Error al crear cliente: " . $conn->error;
-    }
-
-    $stmt->close();
-}
+include '../includes/crear_cliente.php';
 
 ?>
 
@@ -50,7 +31,9 @@ include "../includes/head.php";
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Clientes</h1>
-
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Administrar Clientes</li>
+                    </ol>
                     <?php if (isset($mensaje)): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?=$mensaje?>
@@ -90,29 +73,20 @@ include "../includes/head.php";
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Crear Cliente</button>
+                                        <button type="submit" class="btn btn-primary">Crear Cliente <i
+                                                class="fa-solid fa-check"></i></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <a href="clientes.php" class="btn btn-secondary">Volver a la Lista</a>
+                    <div class="text-right mb-2">
+                        <a href="clientes.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Volver
+                            al listado</a>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Wonderlan 2024</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include "../includes/footer.php";?>
         </div>
     </div>
     <?php include "../includes/scripts.php";?>

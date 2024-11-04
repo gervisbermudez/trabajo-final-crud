@@ -19,8 +19,6 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/admin/vistas/clientes.php">Ver Clientes</a>
                         <a class="nav-link" href="/admin/vistas/crear_cliente.php">Crear Cliente</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Modificar Cliente</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Borrar Cliente</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderland | Clientes";
 
 include '../includes/config.php';
-include "eliminar_cliente.php";
+include "../includes/eliminar_cliente.php";
 
 ?>
 
@@ -34,24 +34,24 @@ include "../includes/head.php";
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Administrar Clientes</li>
                     </ol>
-                    <?php if ($delete_message): ?>
-                    <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                    <?php if (isset($delete_message) && $delete_message): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <?=$delete_message?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <?php endif?>
-                    <!-- Botón para redirigir a crear cliente -->
                     <div class="text-right mb-3">
-                        <a href="crear_cliente.php" class="btn btn-primary">Agregar Cliente</a>
+                        <a href="crear_cliente.php" class="btn btn-primary btn-sm">Agregar Cliente <i
+                                class="fa-solid fa-plus"></i></a>
                     </div>
                     <div class="card mb-4">
                         <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Ultimos Clientes
+                            <i class="fa-solid fa-users"></i>
+                            Listado de Clientes
                         </div>
                         <div class="card-body">
                             <!-- Tabla estática de clientes -->
-                            <table class="table table-striped mt-5" id="datatablesSimple">
+                            <table id="datatablesSimple">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>ID</th>
@@ -63,25 +63,14 @@ include "../includes/head.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include 'leer_cliente.php';?>
+                                    <?php include '../includes/leer_cliente.php';?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Wonderlan 2024</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include '../includes/footer.php';?>
         </div>
     </div>
     <?php include "../includes/scripts.php";?>
