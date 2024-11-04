@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$title = "Wonderland - Admin";
+$title = "Wonderland - Login";
 
 // Simulación de autenticación. Aquí puedes verificar contra una base de datos de usuarios
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Autenticación simulada. Cambiar por validación contra la base de datos
     if ($username == 'admin' && $password == '1234') {
         $_SESSION['admin_logged_in'] = true;
+        $_SESSION['username'] = $_POST['username'];
+
         header('Location: index.php');
         exit;
     } else {
