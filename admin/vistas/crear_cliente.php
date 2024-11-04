@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderlan | Clientes";
 
 include '../includes/config.php';
-include '../includes/crear_cliente.php';
+include '../includes/clientes/crear_cliente.php';
 
 ?>
 

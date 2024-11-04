@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderland | Pedidos";
 
 include '../includes/config.php';
-include 'eliminar_pedido.php';
+include '../includes/eliminar_pedido.php';
 
 ?>
 
@@ -65,7 +65,7 @@ include "../includes/head.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include 'leer_pedido.php';?>
+                                    <?php include '../includes/leer_pedido.php';?>
                                 </tbody>
                             </table>
                         </div>

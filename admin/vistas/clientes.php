@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderland | Clientes";
 
 include '../includes/config.php';
-include "../includes/eliminar_cliente.php";
+include "../includes/clientes/eliminar_cliente.php";
 
 ?>
 
@@ -63,7 +63,7 @@ include "../includes/head.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include '../includes/leer_cliente.php';?>
+                                    <?php include '../includes/clientes/leer_clientes.php';?>
                                 </tbody>
                             </table>
                         </div>
