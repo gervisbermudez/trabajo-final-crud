@@ -1,49 +1,92 @@
+<?php
+// Verifica si el administrador ha iniciado sesión, aquí puedes agregar tu lógica de sesión
+session_start();
+
+// Si no hay sesión de administrador activa, redirige a una página de login
+// Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
+// Ejemplo: si no hay sesión activa, redirigiría a "login.php"
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: ./login.php');
+    exit;
+}
+
+// titulo de la pagina
+$title = "Wonderland | Pedidos";
+
+include '../includes/config.php';
+include 'eliminar_pedido.php';
+
+?>
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-</head>
-<body>
+<html lang="en">
+<?php
+include "../includes/head.php";
+?>
 
-<div class="container">
-    <h1>Bienvenido al Panel de Administración</h1>
-
-    <p>Utilice los siguientes enlaces para gestionar las diferentes secciones de la tienda:</p>
-
-    
-</div>
-<div class="container mt-5">
-        <h2 class="text-center">Pedidos</h2>
-
-        <!-- Botón para redirigir a crear pedido -->
-        <div class="text-right mb-3">
-            <a href="crear_pedido.php" class="btn btn-primary">Agregar Pedido</a>
+<body class="sb-nav-fixed">
+    <?php include "../includes/nav.php";?>
+    <div id="layoutSidenav">
+        <?php include "../includes/sidemenu.php";?>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Pedidos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Administrar Pedidos</li>
+                    </ol>
+                    <?php if ($delete_message): ?>
+                    <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                        <?=$delete_message?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif?>
+                    <!-- Botón para redirigir a crear pedido -->
+                    <div class="text-right mb-3">
+                        <a href="crear_pedido.php" class="btn btn-primary">Agregar Pedido</a>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Ultimos Clientes
+                        </div>
+                        <div class="card-body">
+                            <!-- Tabla estática de clientes -->
+                            <table class="table table-striped mt-5" id="datatablesSimple">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Take away o delivery?</th>
+                                        <th>Dirección</th>
+                                        <th>Estado del pedido</th>
+                                        <th>Precio</th>
+                                        <th>Contacto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php include 'leer_pedido.php';?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Wonderlan 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-
-        <!-- Tabla estática de pedidos -->
-        <table class="table table-striped mt-5">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Take away o delivery?</th>
-                    <th>Dirección</th>
-                    <th>Estado del pedido</th>
-                    <th>Precio</th>
-                    <th>Contacto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php include 'leer_pedido.php'; ?>
-            </tbody>
-        </table>
     </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include "../includes/scripts.php";?>
 </body>
+
 </html>
