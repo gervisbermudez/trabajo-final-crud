@@ -40,21 +40,46 @@ INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `email`, `telefono`,
 	(5, 'Gervis', 'Bermudez', 'gervis-fakemail@gmail.com', '+541157614613', 'OHiggins 4679 8 87 Nuñez', NULL, 1),
 	(13, 'Karen', 'Bermúdez', 'Karen@gmail.com', '+541157614613', 'OHiggins 4679 8 87 Nuñez', NULL, 1);
 
+-- Volcando estructura para tabla tienda_online.detalle_producto
+DROP TABLE IF EXISTS `detalle_producto`;
+CREATE TABLE IF NOT EXISTS `detalle_producto` (
+  `id_detalle` int(11) NOT NULL AUTO_INCREMENT,
+  `id_producto` int(11) DEFAULT NULL,
+  `id_pedido` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `precio` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_detalle`),
+  KEY `id_producto` (`id_producto`),
+  KEY `id_pedido` (`id_pedido`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla tienda_online.detalle_producto: ~1 rows (aproximadamente)
+DELETE FROM `detalle_producto`;
+INSERT INTO `detalle_producto` (`id_detalle`, `id_producto`, `id_pedido`, `cantidad`, `precio`) VALUES
+	(1, 10, 4, 4, 126);
+
 -- Volcando estructura para tabla tienda_online.pedido
 DROP TABLE IF EXISTS `pedido`;
 CREATE TABLE IF NOT EXISTS `pedido` (
   `id_pedido` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` int(11) DEFAULT NULL,
   `fecha_pedido` datetime DEFAULT current_timestamp(),
   `monto_total` decimal(10,2) NOT NULL,
   `estado` enum('pendiente','completado') DEFAULT 'pendiente',
   `metodo_pago` enum('efectivo') DEFAULT 'efectivo',
-  PRIMARY KEY (`id_pedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `delivery` int(11) DEFAULT NULL,
+  `direccion_envio` text DEFAULT NULL,
+  `contacto` text DEFAULT NULL,
+  PRIMARY KEY (`id_pedido`),
+  KEY `id_cliente` (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tienda_online.pedido: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tienda_online.pedido: ~3 rows (aproximadamente)
 DELETE FROM `pedido`;
-INSERT INTO `pedido` (`id_pedido`, `fecha_pedido`, `monto_total`, `estado`, `metodo_pago`) VALUES
-	(1, '2024-11-04 15:20:27', 1234.00, '', 'efectivo');
+INSERT INTO `pedido` (`id_pedido`, `id_cliente`, `fecha_pedido`, `monto_total`, `estado`, `metodo_pago`, `delivery`, `direccion_envio`, `contacto`) VALUES
+	(2, 5, '2024-11-04 22:37:07', 1234.00, 'pendiente', '', 0, 'Buenos Aires', '123546546'),
+	(3, 13, '2024-11-04 22:37:56', 6661234.00, 'pendiente', '', 0, 'Buenos Aires', '123546546'),
+	(4, 5, '2024-11-04 22:39:20', 333555.00, 'completado', '', 1, 'Buenos Aires', '123546546');
 
 -- Volcando estructura para tabla tienda_online.producto
 DROP TABLE IF EXISTS `producto`;
@@ -69,10 +94,9 @@ CREATE TABLE IF NOT EXISTS `producto` (
   PRIMARY KEY (`id_producto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tienda_online.producto: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla tienda_online.producto: ~1 rows (aproximadamente)
 DELETE FROM `producto`;
 INSERT INTO `producto` (`id_producto`, `nombre_producto`, `descripcion`, `imagen`, `tipo_torta`, `precio`, `disponible`) VALUES
-	(9, 'rZGsjWjuIrRdQaj', 'BROVjIyFvZhixVIJIGjZSuYoxdqDVPWisnudumlUhD', '/public/img/uploads/img_672963d6909a59.43585903.jpg', 'entera', 1234.00, 1),
 	(10, 'vrLsoEVXrKOLCtEZvEP', 'fLedSjhoJDvPrQcQYODIpZDqrtTXTn', '/public/img/uploads/img_672964a74e1c26.71295868.jpg', 'entera', 1234.00, 1);
 
 -- Volcando estructura para tabla tienda_online.usuario
