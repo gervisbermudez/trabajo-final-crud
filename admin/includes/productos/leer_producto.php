@@ -7,5 +7,5 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $cliente = $result->fetch_assoc();
+    $producto = $result->fetch_assoc();
 }
