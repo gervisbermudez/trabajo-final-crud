@@ -101,7 +101,7 @@ include "./includes/head.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include './includes/leer_pedido.php';?>
+                                    <?php include './includes/pedidos/leer_pedido.php';?>
                                 </tbody>
                             </table>
                         </div>

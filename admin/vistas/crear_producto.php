@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderlan | Productos";
 
 include '../includes/config.php';
-include '../includes/clientes/crear_cliente.php';
+include '../includes/productos/crear_producto.php';
 
 ?>
 
@@ -55,9 +55,11 @@ include "../includes/head.php";
                                 </div>
 
                                 <div class="mb-3">
-                                    <img id="preview" src="#" alt="Vista previa de la imagen"
-                                        style="display: none; margin-top: 10px; max-width: 100%; height: auto;" />
-                                    <label for="formFile" class="form-label">Fotografia del Producto:</label>
+                                    <label for="formFile" class="form-label"><img id="preview" src="#"
+                                            alt="Vista previa de la imagen"
+                                            style="display: none; margin-bottom: 10px; max-width: 300px; height: auto;"
+                                            class="img-thumbnail" />
+                                        Fotografia del Producto:</label>
                                     <input class="form-control" type="file" id="formFile" onchange="previewImage(event)"
                                         name="imagen" accept="image/*">
                                 </div>

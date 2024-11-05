@@ -1,60 +1,129 @@
 <?php
-include 'config.php';
+// Verifica si el administrador ha iniciado sesión, aquí puedes agregar tu lógica de sesión
+session_start();
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM Producto WHERE id_producto = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $producto = $result->fetch_assoc();
+// Si no hay sesión de administrador activa, redirige a una página de login
+// Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
+// Ejemplo: si no hay sesión activa, redirigiría a "login.php"
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: ./login.php');
+    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id_producto'];
-    $nombre_producto = $_POST['nombre_producto'];
-    $descripcion = $_POST['descripcion'];
-    $tipo_torta = $_POST['tipo_torta'];
-    $precio = $_POST['precio'];
-    $disponible = isset($_POST['disponible']) ? 1 : 0;
+$title = "Wonderland | Productos";
 
-    $sql = "UPDATE Producto SET nombre_producto = ?, descripcion = ?, tipo_torta = ?, precio = ?, disponible = ? WHERE id_producto = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssdii", $nombre_producto, $descripcion, $tipo_torta, $precio, $disponible, $id);
+include '../includes/config.php';
 
-    if ($stmt->execute()) {
-        echo "Producto actualizado con éxito";
-    } else {
-        echo "Error al actualizar el producto: " . $conn->error;
-    }
+include '../includes/productos/leer_producto.php';
 
-    $stmt->close();
-}
+include "../includes/productos/actualizar_producto.php";
+
 ?>
 
-<!-- Formulario HTML para actualizar el producto -->
-<form method="POST" action="">
-    <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
+<!DOCTYPE html>
+<html lang="en">
+<?php
+include "../includes/head.php";
+?>
 
-    <label for="nombre_producto">Nombre del Producto:</label>
-    <input type="text" name="nombre_producto" value="<?php echo $producto['nombre_producto']; ?>" required><br>
+<body class="sb-nav-fixed">
+    <?php include "../includes/nav.php";?>
+    <div id="layoutSidenav">
+        <?php include "../includes/sidemenu.php";?>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Productos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Administrar Productos</li>
+                    </ol>
+                    <?php if (isset($mensaje) && $mensaje): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?=$mensaje?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif?>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fa-solid fa-users"></i>
+                            Actualizar Producto
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="" class="p-2" enctype="multipart/form-data">
+                                <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
 
-    <label for="descripcion">Descripción:</label>
-    <textarea name="descripcion" required><?php echo $producto['descripcion']; ?></textarea><br>
+                                <div class="form-group mb-3">
+                                    <label for="nombre_producto">Nombre del Producto:</label>
+                                    <input type="text" class="form-control"
+                                        value="<?php echo $producto['nombre_producto']; ?>" name="nombre_producto"
+                                        id="nombre_producto" required>
+                                </div>
 
-    <label for="tipo_torta">Tipo de Torta:</label>
-    <select name="tipo_torta" required>
-        <option value="entera" <?php echo ($producto['tipo_torta'] == 'entera') ? 'selected' : ''; ?>>Entera</option>
-        <option value="mediana" <?php echo ($producto['tipo_torta'] == 'mediana') ? 'selected' : ''; ?>>Mediana</option>
-        <option value="porción" <?php echo ($producto['tipo_torta'] == 'porción') ? 'selected' : ''; ?>>Porción</option>
-    </select><br>
+                                <div class="mb-3">
+                                    <img id="preview" src="#" alt="Vista previa de la imagen"
+                                        style="display: none; margin-top: 10px; max-width: 100%; height: auto;" />
+                                    <label for="formFile" class="form-label">Fotografia del Producto:</label>
+                                    <input class="form-control" type="file" id="formFile" onchange="previewImage(event)"
+                                        name="imagen" accept="image/*">
+                                </div>
 
-    <label for="precio">Precio:</label>
-    <input type="number" step="0.01" name="precio" value="<?php echo $producto['precio']; ?>" required><br>
+                                <div class="form-group mb-3">
+                                    <label for="descripcion">Descripción:</label>
+                                    <textarea class="form-control" name="descripcion"
+                                        id="descripcion"><?php echo $producto['descripcion']; ?></textarea>
+                                </div>
 
-    <label for="disponible">Disponible:</label>
-    <input type="checkbox" name="disponible" value="1" <?php echo ($producto['disponible']) ? 'checked' : ''; ?>><br>
+                                <div class="form-group mb-3">
+                                    <label for="tipo_torta">Tipo de Torta:</label>
+                                    <select name="tipo_torta" required class="form-select">
+                                        <option value="entera"
+                                            <?php echo ($producto['tipo_torta'] == 'entera') ? 'selected' : ''; ?>>
+                                            Entera</option>
+                                        <option value="mediana"
+                                            <?php echo ($producto['tipo_torta'] == 'mediana') ? 'selected' : ''; ?>>
+                                            Mediana</option>
+                                        <option value="porción"
+                                            <?php echo ($producto['tipo_torta'] == 'porción') ? 'selected' : ''; ?>>
+                                            Porción</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="precio">Precio:</label>
+                                    <input type="number" class="form-control" value="<?php echo $producto['precio']; ?>"
+                                        step="0.01" name="precio" required>
+                                </div>
 
-    <input type="submit" value="Actualizar Producto">
-</form>
+                                <div class="form-group mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="disponible"
+                                            name="disponible" value="1"
+                                            <?php echo ($producto['disponible']) ? 'checked' : ''; ?>>
+                                        <label class="form-check-label" for="disponible">
+                                            Disponible
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Actualizar Producto <i
+                                                class="fa-solid fa-check"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-right mb-2">
+                        <a href="productos.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>
+                            Volver
+                            al listado</a>
+                    </div>
+                </div>
+            </main>
+            <?php include "../includes/footer.php";?>
+        </div>
+    </div>
+    <?php include "../includes/scripts.php";?>
+</body>
+
+</html>

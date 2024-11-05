@@ -2,7 +2,7 @@
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM clientes WHERE id_cliente = ?";
+    $sql = "SELECT * FROM producto WHERE id_producto = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();

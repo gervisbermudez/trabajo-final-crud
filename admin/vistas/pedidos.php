@@ -36,7 +36,7 @@ include "../includes/head.php";
                         <li class="breadcrumb-item active">Administrar Pedidos</li>
                     </ol>
                     <?php if ($delete_message): ?>
-                    <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?=$delete_message?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
