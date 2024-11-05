@@ -1,32 +1,29 @@
 <?php
 
-$sql = "SELECT * FROM pedido";
-$result = $conn->query($sql);
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    // Realiza un JOIN para obtener información del cliente junto con el pedido
+    $sql = "SELECT pedido.*, clientes.*
+            FROM pedido
+            JOIN clientes ON pedido.id_cliente = clientes.id_cliente
+            WHERE pedido.id_pedido = ?";
 
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $pedido = $result->fetch_assoc();
 
-        echo <<<HTML
-        <tr>
-            <td>{$row['id_pedido']}</td>
-            <td>{$row['estado']}</td>
-            <td>{$row['fecha_pedido']}</td>
-            <td>{$row['direccion_envio']}</td>
-            <td>{$row['monto_total']}</td>
-            <td>
-                <!-- Example split danger button -->
-                <div class="btn-group">
-                <a href="pedido_detalle.php?id={$row['id_pedido']}" class="btn btn-primary ">Detalles del Producto</a> <!-- Reemplaza con la ruta correspondiente -->
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/admin/vistas/actualizar_producto.php?id={$row['id_pedido']}">Editar</a></li>
-                    <li><a class="dropdown-item" href="/admin/vistas/productos.php?delete=true&id={$row['id_pedido']}">Eliminar</a></li>
-                </ul>
-                </div>
-            </td>
-        </tr>
-HTML;
-    }
+    // Obtener productos asociados al pedido
+    $sqlProductos = "SELECT detalle_producto.*, producto.*
+                     FROM detalle_producto
+                     JOIN producto ON detalle_producto.id_producto = producto.id_producto
+                     WHERE detalle_producto.id_pedido = ?";
+
+    $stmtProductos = $conn->prepare($sqlProductos);
+    $stmtProductos->bind_param("i", $id);
+    $stmtProductos->execute();
+    $resultProductos = $stmtProductos->get_result();
+    $productos = $resultProductos->fetch_all(MYSQLI_ASSOC);
+
 }

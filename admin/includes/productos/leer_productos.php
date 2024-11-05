@@ -16,9 +16,8 @@ if ($result && $result->num_rows > 0) {
             <td>{$row['precio']}</td>
             <td>{$disponible}</td>
             <td>
-                <!-- Example split danger button -->
                 <div class="btn-group">
-                <a href="producto_detalle.php?id={$row['id_producto']}" class="btn btn-primary ">Detalles del Producto</a> <!-- Reemplaza con la ruta correspondiente -->
+                <a href="producto_detalle.php?id={$row['id_producto']}" class="btn btn-primary ">Detalles</a>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>

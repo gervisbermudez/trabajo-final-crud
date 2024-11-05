@@ -11,10 +11,10 @@ if (!isset($_SESSION['admin_logged_in'])) {
 }
 
 // titulo de la pagina
-$title = "Wonderland | Productos";
+$title = "Wonderland | Pedido";
 
 include '../includes/config.php';
-include '../includes/productos/leer_producto.php';
+include '../includes/pedidos/leer_pedido.php';
 
 ?>
 
@@ -35,31 +35,67 @@ include "../includes/head.php";
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Administrar Pedido</li>
                     </ol>
-                    <div class="text-right mb-3">
-                        <a href="/admin/vistas/actualizar_producto.php?id=<?php echo $producto['id_producto']; ?>"
-                            class="btn btn-primary btn-sm">Editar Pedido <i class="fa-solid fa-pencil"></i></a>
-                    </div>
                     <div class="container px-4 px-lg-5 my-5">
-                        <div class="row gx-4 gx-lg-5 align-items-center">
-                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
-                                    src="<?php echo $producto['imagen']; ?>" alt="..."></div>
-                            <div class="col-md-6">
-                                <div class="small mb-1">ID: <?php echo $producto['id_producto']; ?></div>
-                                <h1 class="display-5 fw-bolder"><?php echo $producto['nombre_producto']; ?></h1>
-                                <div class="fs-5 mb-5">
-                                    Precio:
-                                    <span class="">$ <?php echo $producto['precio']; ?></span>
+                        <div class="row gx-4 gx-lg-5">
+                            <div class="col-sm-6">
+                                <div class="small mb-1">Pedido ID: <?php echo $pedido['id_pedido']; ?></div>
+                                <h1 class="display-5 fw-bolder">
+                                    <?php echo $pedido['nombre'] . ' ' . $pedido['apellido']; ?></h1>
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Monto:</strong></div>
+                                    <span class="">$ <?php echo $pedido['monto_total']; ?></span>
                                 </div>
-                                <p class="lead"><?php echo $producto['descripcion']; ?></p>
-                                <div for="tipo_torta">Tipo de Torta: <?php echo $producto['tipo_torta']; ?></div>
-                                <div class="d-flex">
-                                    <?php echo ($producto['disponible']) ? 'Disponible' : 'No disponible'; ?>
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Estado:</strong></div>
+                                    <span class=""> <?php echo $pedido['estado']; ?></span>
                                 </div>
+
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Metodo de Pago:</strong></div>
+                                    <span class=""><?php echo $pedido['metodo_pago']; ?></span>
+                                </div>
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Delivery:</strong></div>
+                                    <span class=""><?php echo $pedido['direccion_envio']; ?></span>
+                                </div>
+
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Direccion de Envio:</strong></div>
+                                    <span class=""><?php echo $pedido['direccion_envio']; ?></span>
+                                </div>
+
+                                <div class="fs-5 mb-1">
+                                    <div><strong>Contacto:</strong></div>
+                                    <span class=""><?php echo $pedido['contacto']; ?></span>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <h2>Productos del Pedido:</h2>
+                                <?php if (!empty($productos)): ?>
+                                <div class="list-group mt-3">
+                                    <?php foreach ($productos as $producto): ?>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1"><?=htmlspecialchars($producto['nombre_producto'])?></h5>
+                                            <small>Precio: $<?=number_format($producto['precio'], 2)?></small>
+                                        </div>
+                                        <p class="mb-1"><?=htmlspecialchars($producto['descripcion'])?></p>
+                                        <small>Cantidad: <?=htmlspecialchars($producto['cantidad'])?></small>
+                                    </a>
+                                    <?php endforeach;?>
+                                </div>
+                                <?php else: ?>
+                                <div class="alert alert-warning" role="alert">
+                                    No hay productos asociados a este pedido.
+                                </div>
+                                <?php endif;?>
+
                             </div>
                         </div>
                     </div>
                     <div class="text-right mb-2">
-                        <a href="productos.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>
+                        <a href="pedidos.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>
                             Volver
                             al listado</a>
                     </div>

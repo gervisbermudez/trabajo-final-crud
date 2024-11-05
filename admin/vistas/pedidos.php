@@ -65,7 +65,7 @@ include "../includes/head.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include '../includes/pedidos/leer_pedido.php';?>
+                                    <?php include '../includes/pedidos/leer_pedidos.php';?>
                                 </tbody>
                             </table>
                         </div>
