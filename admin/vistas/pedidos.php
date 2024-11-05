@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 $title = "Wonderland | Pedidos";
 
 include '../includes/config.php';
-include '../includes/eliminar_pedido.php';
+include '../includes/pedidos/eliminar_pedido.php';
 
 ?>
 
@@ -43,7 +43,8 @@ include "../includes/head.php";
                     <?php endif?>
                     <!-- Botón para redirigir a crear pedido -->
                     <div class="text-right mb-3">
-                        <a href="crear_pedido.php" class="btn btn-primary">Agregar Pedido</a>
+                        <a href="crear_pedido.php" class="btn btn-primary">Agregar Pedido <i
+                                class="fa-solid fa-cart-plus"></i></a>
                     </div>
                     <div class="card mb-4">
                         <div class="card-header">
@@ -52,38 +53,26 @@ include "../includes/head.php";
                         </div>
                         <div class="card-body">
                             <!-- Tabla estática de clientes -->
-                            <table class="table table-striped mt-5" id="datatablesSimple">
+                            <table class="table table-striped" id="datatablesSimple">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Cliente</th>
-                                        <th>Take away o delivery?</th>
+                                        <th>Estado</th>
+                                        <th>Fecha</th>
                                         <th>Dirección</th>
-                                        <th>Estado del pedido</th>
-                                        <th>Precio</th>
-                                        <th>Contacto</th>
+                                        <th>Monto</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include '../includes/leer_pedido.php';?>
+                                    <?php include '../includes/pedidos/leer_pedido.php';?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Wonderlan 2024</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include '../includes/footer.php';?>
         </div>
     </div>
     <?php include "../includes/scripts.php";?>

@@ -14,23 +14,7 @@ $title = "Wonderlan | Clientes";
 
 include '../includes/config.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $monto_total = $_POST['monto_total'];
-    $estado = $_POST['estado']; // 'pendiente' o 'completado'
-
-    $sql = "INSERT INTO Pedido (monto_total, estado) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ds", $monto_total, $estado); // "d" para decimal, "s" para string
-
-    if ($stmt->execute()) {
-        $mensaje = "Cliente creado con éxito";
-    } else {
-        $mensaje = "Error al crear cliente: " . $conn->error;
-    }
-
-    $stmt->close();
-}
-
+include '../includes/pedidos/crear_pedido.php';
 ?>
 
 <!DOCTYPE html>
@@ -46,8 +30,10 @@ include "../includes/head.php";
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Clientes</h1>
-
+                    <h1 class="mt-4">Pedidos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Administrar Pedidos</li>
+                    </ol>
                     <?php if (isset($mensaje)): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?=$mensaje?>
@@ -57,11 +43,25 @@ include "../includes/head.php";
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fa-solid fa-users"></i>
-                            Agregar Cliente
+                            Agregar Pedido
                         </div>
                         <div class="card-body">
                             <!-- Formulario para crear un cliente -->
                             <form method="POST" action="" class="p-2">
+                                <div class="form-group mb-3">
+                                    <label for="">Cliente</label>
+                                    <select class="form-control" name="id_cliente" id="">
+                                        <option>Seleccione</option>
+                                        <?php
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<option value='" . $row["id_cliente"] . "'>" . $row["nombre"] . " " . $row["apellido"] . "</option>";
+    }
+}
+?>
+                                    </select>
+                                </div>
+
                                 <div class="form-group mb-3">
                                     <label for="monto_total">Monto</label>
                                     <div class="input-group mb-3">
@@ -70,7 +70,23 @@ include "../includes/head.php";
                                             aria-label="Monto" required>
                                     </div>
                                 </div>
-
+                                <div class="form-group mb-3">
+                                    <label for="metodo_pago">Metodo de Pago:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_pago"
+                                            value="pendiente" id="metodo_pago1">
+                                        <label class="form-check-label" for="metodo_pago1">
+                                            Efectivo
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_pago"
+                                            value="completado" id="metodo_pago2">
+                                        <label class="form-check-label" for="metodo_pago2">
+                                            Tarjeta
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="form-group mb-3">
                                     <label for="estado">Estado:</label>
                                     <div class="form-check">
@@ -87,6 +103,22 @@ include "../includes/head.php";
                                             Completado
                                         </label>
                                     </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="direccion_envio">Dirección:</label>
+                                    <textarea class="form-control" name="direccion_envio"
+                                        id="direccion_envio"></textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="contacto">Contacto:</label>
+                                    <input type="text" class="form-control" name="contacto" id="contacto">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        checked name="delivery">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Delivery
+                                    </label>
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">

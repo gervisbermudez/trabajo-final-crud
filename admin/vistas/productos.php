@@ -53,7 +53,7 @@ include "../includes/head.php";
                         </div>
                         <div class="card-body">
                             <!-- Tabla estática de clientes -->
-                            <table class="table table-striped mt-5" id="datatablesSimple">
+                            <table class="table table-striped" id="datatablesSimple">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>ID Producto</th>
