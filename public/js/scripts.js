@@ -1,66 +1,82 @@
-$(document).ready(function () {
-  for (let i = 0; i < productos.length; i++) {
-    $("#productos").append(
-      '<div class= "col">' +
-        '<div class="card sc-product-item">' +
-        '<img data-name="product_image" src="public/img/' +
-        productos[i].foto +
-        '"class="card-img-top" alt="' +
-        productos[i].nombre +
-        '">' +
-        '<div class="card-body">' +
-        '<h2 data-name="product_name" class="card-title">' +
-        productos[i].nombre +
-        "</h2>" +
-        '<p data-name=product_desc class="card-text">' +
-        productos[i].descripcion +
-        "</p>" +
-        '<p class="card-text">$' +
-        productos[i].precio +
-        "</p>" +
-        '<input name="product_price" value="' +
-        productos[i].precio +
-        '" type="hidden" />' +
-        '<input name="product_id" value="' +
-        productos[i] +
-        '" type="hidden" />' +
-        '<button class="sc-add-to-cart btn btn-dark text-light">Agregar</button>' +
-        "</div>" +
-        "</div>" +
-        "</div>"
-    );
-  }
-  $("#smartcart").smartCart({
-    cartItemTemplate:
-      '<h3 class="h6 list-group-item-heading">{product_name}</h3>',
-    lang: {
-      cartTitle: "Tu pedido",
-      checkout: "Pedir",
-      clear: "Borrar",
-      subtotal: "Subtotal:",
-      cartRemove: "x",
-      cartEmpty: "Nada en tu carrito!<br />Elige tus productos",
-    },
-  });
-});
+$(document).ready(function() {
+  $('.add-to-cart').on('click', function() {
+      // Obtener los datos del producto
+      var productName = $(this).data('name');
+      var productPrice = $(this).data('price');
 
-//Plugin Smart
+      // Verificar si el producto ya está en el carrito
+      var existingProduct = $('#cart-form').find('.product-name').filter(function() {
+          return $(this).text().includes(productName);
+      });
+
+      // Si el producto ya existe, incrementar la cantidad
+      if (existingProduct.length > 0) {
+          var quantityInput = existingProduct.closest('.product-item').find('.product-quantity');
+          var newQuantity = parseInt(quantityInput.val()) + 1;
+          quantityInput.val(newQuantity);
+      } else {
+          // Si el producto no está en el carrito, agregarlo
+          var productHtml = `
+              <div class="product-item">
+                  <div class="form-group product-name">
+                      <label for="product-name" class="font-weight-bold">Producto: ${productName}</label>
+                      <input type="hidden" name="product_names[]" value="${productName}">
+                  </div>
+                  <div class="form-group row">
+                      <label for="quantity" class="col-sm-6 col-form-label">Cantidad:</label>
+                      <div class="col-sm-6">
+                          <input type="number" hidden name="precios[]" value="${productPrice}">
+                          <input type="number" class="form-control form-control-sm product-quantity" value="1" min="1" name="quantities[]" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <button type="button" class="btn btn-danger btn-sm remove-product">&times;</button>
+                  </div>
+              </div>
+          `;
+          $('#cart-products-list').append(productHtml);
+      }
+
+      // Mostrar el formulario del carrito si no está visible
+      $('#cart-form-container').show();
+  });
+
+  // Evento para eliminar el producto del carrito
+  $('#cart-form').on('click', '.remove-product', function() {
+      $(this).closest('.product-item').remove();
+  });
+
+  // Cuando el usuario haga clic en 'Pedir', agregar productos al formulario para enviarlos
+  $('#cart-form').on('submit', function(e) {
+      e.preventDefault();  // Evita el envío del formulario
+
+      var products = [];
+      $('.product-item').each(function() {
+          var productName = $(this).find('.product-name').text().replace('Producto: ', '');
+          var quantity = $(this).find('.product-quantity').val();
+          products.push({ name: productName, quantity: quantity });
+      });
+
+      // Primero, limpiar los campos ocultos del formulario
+      $('#cart-form').find('input[type="hidden"]').remove();
+
+      // Añadir los productos como inputs hidden para enviar al servidor
+      products.forEach(function(product) {
+          var hiddenNameInput = `<input type="hidden" name="product_names[]" value="${product.name}">`;
+          var hiddenQuantityInput = `<input type="hidden" name="quantities[]" value="${product.quantity}">`;
+          $('#cart-form').append(hiddenNameInput + hiddenQuantityInput);
+      });
+
+      // Ahora puedes enviar el formulario
+      $('#cart-form')[0].submit(); 
+  });
+
+
+});
 
 //Plugin Carrusel
 $(document).ready(function () {
   $(".owl-carousel").owlCarousel();
-});
-
-//plugin Whatsapp
-
-$(function () {
-  $(".floating-wpp").floatingWhatsApp({
-    phone: "1123894930",
-    popupMessage: "Mandanos un WhatsApp",
-    showPopup: true,
-    message: "Hola, me gustaria comunicarme con ustedes",
-    headerTitle: "Wonderland",
-  });
 });
 
 //Plug in acordeon

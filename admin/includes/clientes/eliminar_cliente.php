@@ -8,7 +8,7 @@ if (isset($_GET['id']) && $delete) {
     $id = $_GET['id'];
 
     // Verificar si el cliente existe
-    $check_sql = "SELECT id_cliente FROM clientes WHERE id_cliente = ?";
+    $check_sql = "SELECT id_cliente FROM cliente WHERE id_cliente = ?";
     $check_stmt = $conn->prepare($check_sql);
     $check_stmt->bind_param("i", $id);
     $check_stmt->execute();
@@ -16,7 +16,7 @@ if (isset($_GET['id']) && $delete) {
 
     if ($check_stmt->num_rows > 0) {
         // El cliente existe, proceder a eliminar
-        $sql = "DELETE FROM clientes WHERE id_cliente = ?";
+        $sql = "DELETE FROM cliente WHERE id_cliente = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
 

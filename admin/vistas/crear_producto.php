@@ -6,7 +6,7 @@ session_start();
 // Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
 // Ejemplo: si no hay sesión activa, redirigiría a "login.php"
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: ./login.php');
+    header('Location: /admin/login.php');
     exit;
 }
 

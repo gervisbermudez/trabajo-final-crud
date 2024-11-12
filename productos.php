@@ -1,5 +1,5 @@
-<!DOCTYPE php>
-<php lang="es">
+<!DOCTYPE html>
+<html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -8,8 +8,8 @@
 
         <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" href="/public/css/style.css">
-        <link rel="css_smartcart" href="/public/vendors/jquery_smart.cart/css/smart_cart.min.css">
-
+        <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.theme.default.min.css">
     </head>
 
     <body>
@@ -54,19 +54,54 @@
                 </div>
 
                 <div class="col-md-9 py-4">
+                    <div id="productos" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 py-4">
+                        <?php
+                            // Configuración de la conexión a la base de datos
+                            $host = 'localhost'; // El nombre del servidor o IP
+                            $db = 'tienda_online'; // Nombre de la base de datos
+                            $user = 'root'; // Usuario de la base de datos 
+                            $pass = ''; // Contraseña de la base de datos
 
-                    <div id="productos" class="row row-cols-1 row-col-sm-2 row-cols-lg-3 py-4">
+                            // Crear la conexión
+                            $conn = new mysqli($host, $user, $pass, $db);
+
+                            $sql = "SELECT * FROM producto";
+                            $result = $conn->query($sql);
+
+                            // Verificar si hay productos
+                            if ($result->num_rows > 0) {
+                                // Mostrar los productos
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<div class='col'>";
+                                    echo "<div class='card' style='width: 18rem;'>";
+                                    echo "<img src='" . $row['imagen'] . "' class='card-img-top' alt='" . $row['nombre_producto'] . "'>";
+                                    echo "<div class='card-body'>";
+                                    echo "<h5 class='card-title'>" . $row['nombre_producto'] . "</h5>";
+                                    echo "<p class='card-text'>" . $row['descripcion'] . "</p>";
+                                    echo "<p class='card-text'>$" . $row['precio'] . "</p>";
+                                    echo "<button class='btn btn-primary add-to-cart' data-name='" . $row['nombre_producto'] . "' data-price='" . $row['precio'] . "'>Añadir al carrito</button>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                }
+                            } else {
+                                echo "No se encontraron productos";
+                            }
+
+                            // Cerrar la conexión
+                            $conn->close();
+                        ?>
                     </div>
                 </div>
 
-                <div class="col-md-3 mt-5 mb-4">
-                    <header>
-                        <h3>Carrito</h3>
-                    </header>
-
-                    <div id="smartcart"> </div>
-
+                <div class="col-md-3 mt-5 mb-4" id="cart-form-container" style="display:none;">
+                    <h4>Tu carrito</h4>
+                    <form id="cart-form" action="procesar_pedido.php" method="POST">
+                        <div id="cart-products-list"></div> <!-- Aquí se agregarán los productos seleccionados -->
+                        <button type="submit" class="btn btn-success mt-3">Pedir</button>
+                    </form>
                 </div>
+
             </div>
 
             <div class="container-fluid">
@@ -128,11 +163,11 @@
             <!--jQuery-->
             <script src="/public/vendors/jquery-3.7.1.min.js"></script>
 
-            <!--Plugin SmartCart-->
-            <script src="/public/vendors/jquery_smart.cart/js/jquery.smartCart.min.js"></script>
+            <!--Plugin flip-->
+            <script src="/public/vendors/plugin_flipster/jquery.flipster.min.js"></script>
 
             <!--Plugin Carrusel automatico-->
-            <script src="/public/vendors/jquery_owl.carrusel/js/owl.carousel.js"></script>
+            <script src="/public/vendors/jquery_owl.carrusel/dist/owl.carousel.js"></script>
 
             <!--Js Productos-->
             <script src="/public/js/productos.js"></script>
@@ -142,3 +177,4 @@
     </body>
 
 </php>
+</html>

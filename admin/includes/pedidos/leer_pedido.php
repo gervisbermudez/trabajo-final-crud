@@ -3,9 +3,9 @@
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     // Realiza un JOIN para obtener información del cliente junto con el pedido
-    $sql = "SELECT pedido.*, clientes.*
+    $sql = "SELECT pedido.*, cliente.*
             FROM pedido
-            JOIN clientes ON pedido.id_cliente = clientes.id_cliente
+            JOIN cliente ON pedido.id_cliente = cliente.id_cliente
             WHERE pedido.id_pedido = ?";
 
     $stmt = $conn->prepare($sql);
@@ -15,10 +15,10 @@ if (isset($_GET['id'])) {
     $pedido = $result->fetch_assoc();
 
     // Obtener productos asociados al pedido
-    $sqlProductos = "SELECT detalle_producto.*, producto.*
-                     FROM detalle_producto
-                     JOIN producto ON detalle_producto.id_producto = producto.id_producto
-                     WHERE detalle_producto.id_pedido = ?";
+    $sqlProductos = "SELECT Detalle_Pedido.*, producto.*
+                     FROM Detalle_Pedido
+                     JOIN producto ON Detalle_Pedido.id_producto = producto.id_producto
+                     WHERE Detalle_Pedido.id_pedido = ?";
 
     $stmtProductos = $conn->prepare($sqlProductos);
     $stmtProductos->bind_param("i", $id);

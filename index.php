@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wonderland</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/style.css">
     <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.theme.default.min.css">
     <link href="/public/vendors/jquery_accordion/css/jquery.beefup.css" rel="plugin_accordion">
-    <link rel="css_smartcart" href="/public/vendors/jquery_smart.cart/css/smart_cart.min.css">
     <link rel="stylesheet" href="/public/vendors/plugin_flipster/jquery.flipster.min.css">
     <link rel="stylesheet" href="/public/vendors/jquery_whatsapp/css/floating-wpp.min.css">
-
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
 
 </head>
@@ -227,9 +226,6 @@
     <!--jQuery-->
     <script src="/public/vendors/jquery-3.7.1.min.js"></script>
 
-    <!--Plugin SmartCart-->
-    <script src="/public/vendors/jquery_smart.cart/js/jquery.smartCart.min.js"></script>
-
     <!--Plugin Carrusel automatico-->
     <script src="/public/vendors/jquery_owl.carrusel/dist/owl.carousel.js"></script>
 
@@ -237,7 +233,7 @@
     <script src="/public/vendors/plugin_flipster/jquery.flipster.min.js"></script>
 
     <!--Plugin Accordion-->
-    <script src='vendors/jquery_accordion/js/jquery.beefup.min.js'> </script>
+    <script src='/public/vendors/jquery_accordion/js/jquery.beefup.min.js'> </script>
 
     <!--Plugin Whatsapp-->
     <script src="/public/vendors/jquery_whatsapp/js/floating-wpp.min.js"></script>

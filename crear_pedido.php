@@ -1,4 +1,18 @@
 <?php
+// Configuración de la conexión a la base de datos
+$host = 'localhost'; // El nombre del servidor o IP
+$db = 'tienda_online'; // Nombre de la base de datos
+//TODO reemplazar por el usuario y contraseña que sean
+$user = 'root'; // Usuario de la base de datos 
+$pass = ''; // Contraseña de la base de datos
+
+// Crear la conexión
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Comprobar si hay errores en la conexión
+if ($conn->connect_error) {
+    die("Error en la conexión: " . $conn->connect_error);
+}
 
 $sql = "SELECT * FROM cliente";
 $result = $conn->query($sql);
@@ -6,7 +20,7 @@ $result = $conn->query($sql);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_cliente = $_POST['id_cliente'];
     $metodo_pago = $_POST['metodo_pago'];
-    $estado = $_POST['estado'];
+    $estado = 1;
     $direccion_envio = $_POST['direccion_envio'];
     $contacto = $_POST['contacto'];
     $delivery = isset($_POST['delivery']) ? 1 : 0; // 1 si está marcado, 0 si no
@@ -27,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id_pedido = $stmt->insert_id;
 
         // Insertar productos en DetallePedido y calcular monto total
-        $sqldetalle = "INSERT INTO Detalle_Pedido (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
+        $sqldetalle = "INSERT INTO detalle_pedido (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
         $dstmt = $conn->prepare($sqldetalle);
 
         // Recorrer los productos y calcular el monto total

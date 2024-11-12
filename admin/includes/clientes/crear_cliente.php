@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telefono = $_POST['telefono'];
     $direccion = $_POST['direccion'];
 
-    $sql = "INSERT INTO clientes (nombre, apellido, email, telefono, direccion) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cliente (nombre, apellido, email, telefono, direccion) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('sssss', $nombre, $apellido, $email, $telefono, $direccion); // string, string, string, string, string
 

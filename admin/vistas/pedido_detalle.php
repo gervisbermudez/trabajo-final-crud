@@ -6,7 +6,7 @@ session_start();
 // Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
 // Ejemplo: si no hay sesión activa, redirigiría a "login.php"
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: ./login.php');
+    header('Location: /admin/login.php');
     exit;
 }
 
@@ -40,7 +40,8 @@ include "../includes/head.php";
                             <div class="col-sm-6">
                                 <div class="small mb-1">Pedido ID: <?php echo $pedido['id_pedido']; ?></div>
                                 <h1 class="display-5 fw-bolder">
-                                    <?php echo $pedido['nombre'] . ' ' . $pedido['apellido']; ?></h1>
+                                    <?php echo $pedido['nombre'] . ' ' . $pedido['apellido']; ?>
+                                </h1>
                                 <div class="fs-5 mb-1">
                                     <div><strong>Monto:</strong></div>
                                     <span class="">$ <?php echo $pedido['monto_total']; ?></span>

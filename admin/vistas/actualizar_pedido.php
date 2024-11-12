@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../includes/config.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -45,3 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <input type="submit" value="Actualizar Pedido">
 </form>
+
+<!-- Botón para volver atrás -->
+<div class="text-right mb-2">
+                        <a href="pedidos.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>
+                            Volver
+                            al listado</a>
+                    </div>

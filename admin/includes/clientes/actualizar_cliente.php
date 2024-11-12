@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $update) {
     $telefono = $_POST['telefono'];
     $direccion = $_POST['direccion'];
 
-    $sql = "UPDATE clientes SET nombre = ?, apellido = ?, email = ?, telefono = ?, direccion = ? WHERE id_cliente = ?";
+    $sql = "UPDATE cliente SET nombre = ?, apellido = ?, email = ?, telefono = ?, direccion = ? WHERE id_cliente = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssi", $nombre, $apellido, $email, $telefono, $direccion, $id);
 

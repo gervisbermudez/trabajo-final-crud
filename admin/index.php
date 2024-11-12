@@ -6,7 +6,7 @@ session_start();
 // Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
 // Ejemplo: si no hay sesión activa, redirigiría a "login.php"
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: ./login.php');
+    header('Location: /admin/login.php');
     exit;
 }
 
@@ -38,7 +38,7 @@ include "./includes/head.php";
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Pedidos</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" href="vistas/pedidos.php">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ include "./includes/head.php";
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">Clientes</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" href="vistas/clientes.php">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@ include "./includes/head.php";
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">Productos</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" href="vistas/productos.php">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>

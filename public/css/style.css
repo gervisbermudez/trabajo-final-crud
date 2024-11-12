@@ -5,7 +5,7 @@ body {
 
 @media (min-width: 768px) {
 #header {
-    background-image: url('/img/header.png');
+    background-image: url('/public/img/header.png');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -61,7 +61,7 @@ a.btn-custom {
 
 @media (min-width: 768px) {
 #quienes_somos {
-    background-image: url('/img/Banner_quienes_somos.jpg');
+    background-image: url('public/img/Banner_quienes_somos.jpg');
     background-size: cover;
     background-position: right; 
     background-repeat: no-repeat;
@@ -71,7 +71,7 @@ a.btn-custom {
 
 @media (min-width: 768px) {
 #FAQ {
-    background-image: url('/img/banner_FAQ.jpg');
+    background-image: url('/public/img/banner_FAQ.jpg');
     background-size: cover;
     background-position: right; 
     background-repeat: no-repeat;
@@ -81,7 +81,7 @@ a.btn-custom {
 
 @media (min-width: 768px) {
 #contacto {
-    background-image: url('/img/banner_contacto.jpg');
+    background-image: url('/public/img/banner_contacto.jpg');
     background-size: cover;
     background-position: right; 
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@ a.btn-custom {
 
 @media (min-width: 768px) {
     #tienda {
-        background-image: url('/img/banner_tienda.jpg');
+        background-image: url('/public/img/banner_tienda.jpg');
         background-size: cover;
         background-position: right; 
         background-repeat: no-repeat;

@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT * FROM clientes";
+$sql = "SELECT * FROM Cliente";
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
