@@ -12,35 +12,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid align-items-center">
-            <a class="navbar-brand" href="index.php"><img src="public/img/logo_wonderland.png" alt="logo de la web"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#Sucursales">Sucursales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.php">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.php">Quiénes somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FAQ.php">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-dark"><a class="nav-link text-light"
-                                href="contacto.php">Contacto</a></button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/navbar.php';?>
 
     <div class="container">
         <div class="col-12 mt-4">

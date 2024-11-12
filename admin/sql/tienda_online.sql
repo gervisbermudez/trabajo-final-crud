@@ -27,18 +27,21 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `fecha_alta` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_cliente`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_cliente`) USING BTREE,
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla tienda_online.cliente: ~4 rows (aproximadamente)
-INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `email`, `telefono`, `direccion`, `fecha_alta`) VALUES
-	(1, 'Romina', 'Sosa', 'rominasosatreguer@gmail.com', '+541155432310', 'Lala 897 7b', NULL),
-	(2, 'Karen', 'Bermúdez', 'Karen@gmail.com', '+541157614613', 'OHiggins 4679 8 87 Nuñez', NULL),
-	(3, 'Priscila', 'Lera', 'pri@gmail.com', '+541190854312', 'Sarmiento 4679', NULL),
-	(4, 'Pepito', 'Alvarez', 'pepitoalvarez@outlook.com', '1587900203', 'Avellaneda 855, CABA', NULL);
+DELETE FROM `cliente`;
+INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `email`, `password`, `telefono`, `direccion`, `fecha_alta`) VALUES
+	(1, 'Romina', 'Sosa', 'rominasosatreguer@gmail.com', '$2y$10$tsSw1u.csK1DosiVY5/Ycu7lIE/fxbYOBtxHjANdIE3UAGATilqM6', '+541155432310', 'Lala 897 7b', NULL),
+	(2, 'Karen', 'Bermúdez', 'Karen@gmail.com', '$2y$10$tsSw1u.csK1DosiVY5/Ycu7lIE/fxbYOBtxHjANdIE3UAGATilqM6', '+541157614613', 'OHiggins 4679 8 87 Nuñez', NULL),
+	(3, 'Priscila', 'Lera', 'pri@gmail.com', '$2y$10$tsSw1u.csK1DosiVY5/Ycu7lIE/fxbYOBtxHjANdIE3UAGATilqM6', '+541190854312', 'Sarmiento 4679', NULL),
+	(4, 'Pepito', 'Alvarez', 'pepitoalvarez@outlook.com', '$2y$10$tsSw1u.csK1DosiVY5/Ycu7lIE/fxbYOBtxHjANdIE3UAGATilqM6', '1587900203', 'Avellaneda 855, CABA', NULL);
 
 -- Volcando estructura para tabla tienda_online.detalle_pedido
 DROP TABLE IF EXISTS `detalle_pedido`;
@@ -51,16 +54,10 @@ CREATE TABLE IF NOT EXISTS `detalle_pedido` (
   PRIMARY KEY (`id_detalle`),
   KEY `id_producto` (`id_producto`),
   KEY `id_pedido` (`id_pedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tienda_online.detalle_pedido: ~6 rows (aproximadamente)
-INSERT INTO `detalle_pedido` (`id_detalle`, `id_producto`, `id_pedido`, `cantidad`, `precio`) VALUES
-	(2, 1, 12, 1, 4500),
-	(3, 2, 13, 3, 4000),
-	(4, 1, 15, 1, 4500),
-	(5, 0, 16, 1, NULL),
-	(6, 0, 17, 1, NULL),
-	(7, 0, 18, 1, NULL);
+-- Volcando datos para la tabla tienda_online.detalle_pedido: ~0 rows (aproximadamente)
+DELETE FROM `detalle_pedido`;
 
 -- Volcando estructura para tabla tienda_online.pedido
 DROP TABLE IF EXISTS `pedido`;
@@ -76,24 +73,14 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `contacto` text DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `id_cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tienda_online.pedido: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla tienda_online.pedido: ~3 rows (aproximadamente)
+DELETE FROM `pedido`;
 INSERT INTO `pedido` (`id_pedido`, `id_cliente`, `fecha_pedido`, `monto_total`, `estado`, `metodo_pago`, `delivery`, `direccion_envio`, `contacto`) VALUES
 	(5, 1, '2024-11-10 17:34:58', 4000.00, 'pendiente', 'efectivo', 1, 'Avenida San Martín 3411', 'rominasosa@blabla.com'),
 	(6, 1, '2024-11-10 17:35:30', 0.00, 'pendiente', 'efectivo', 1, 'Avenida San Martín 3411', 'rominasosa@blabla.com'),
-	(7, 1, '2024-11-10 17:38:34', 0.00, 'pendiente', 'efectivo', 1, 'Av. San Martín 3411', 'rominasosa@blabla.com'),
-	(8, 1, '2024-11-10 18:42:37', 0.00, 'pendiente', 'efectivo', 1, 'bla bla', '11111'),
-	(9, 1, '2024-11-10 18:44:21', 0.00, 'pendiente', 'efectivo', 1, 'bla bla', '11111'),
-	(10, 1, '2024-11-10 18:44:25', 0.00, 'pendiente', 'efectivo', 1, 'bla bla', '11111'),
-	(11, 1, '2024-11-10 18:45:07', 0.00, 'completado', 'efectivo', 1, 'bla bla', '11111'),
-	(12, 1, '2024-11-10 18:46:38', 4500.00, 'pendiente', 'efectivo', 1, 'bla bla', '11111'),
-	(13, 1, '2024-11-10 18:49:02', 12000.00, 'completado', '', 0, 'Calle falsa 123', 'rominasosa@blabla.com'),
-	(14, 1, '2024-11-10 20:02:13', 0.00, 'pendiente', 'efectivo', 1, 'calle falsa 123', 'rominasosa@blabla.com'),
-	(15, 1, '2024-11-10 20:02:48', 4500.00, 'pendiente', 'efectivo', 1, 'calle falsa 123', 'rominasosa@blabla.com'),
-	(16, 3, '2024-11-12 15:44:06', 0.00, 'pendiente', 'efectivo', 1, 'gnhv\r\nbg', 'scx'),
-	(17, 3, '2024-11-12 15:44:11', 0.00, 'pendiente', 'efectivo', 1, 'gnhv\r\nbg', 'scx'),
-	(18, 4, '2024-11-12 15:44:27', 0.00, 'pendiente', 'efectivo', 1, 'Hola Mundo', 'scx');
+	(7, 1, '2024-11-10 17:38:34', 0.00, 'pendiente', 'efectivo', 1, 'Av. San Martín 3411', 'rominasosa@blabla.com');
 
 -- Volcando estructura para tabla tienda_online.producto
 DROP TABLE IF EXISTS `producto`;
@@ -109,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla tienda_online.producto: ~9 rows (aproximadamente)
+DELETE FROM `producto`;
 INSERT INTO `producto` (`id_producto`, `nombre_producto`, `descripcion`, `imagen`, `tipo_torta`, `precio`, `disponible`) VALUES
 	(1, 'Tarta de frutilla con crema', 'Porción de torta de frutillas, azúcar en una base de masa quebrada con gelatina y crema.', '/public/img/tarta_frutilla.png', 'entera', 4500.00, 1),
 	(2, 'Budín de limón', 'Porción de un delicioso budín esponjoso impregnado con jugo de limón fresco y ralladura de limón, coronado con un glaseado de limón para un sabor cítrico irresistible.', '/public/img/budin_limon.png', 'entera', 4000.00, 1),
@@ -132,7 +120,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tienda_online.usuario: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla tienda_online.usuario: ~2 rows (aproximadamente)
+DELETE FROM `usuario`;
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email`, `contraseña`, `tipo_usuario`) VALUES
 	(1, 'milena', 'milena@hotmail.com', '123', 'Administrador'),
 	(2, 'ignacio', 'ignacio@hotmail.com', '123', 'Administrador');

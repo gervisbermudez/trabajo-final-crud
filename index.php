@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wonderland</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/style.css">
     <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/public/vendors/jquery_owl.carrusel/dist/assets/owl.theme.default.min.css">
     <link href="/public/vendors/jquery_accordion/css/jquery.beefup.css" rel="plugin_accordion">
@@ -20,35 +19,8 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid align-items-center">
-            <a class="navbar-brand" href="index.php"><img src="public/img/logo_wonderland.png" alt="logo de la web"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Sucursales">Sucursales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.php">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.php">Quiénes somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FAQ.php">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-dark"><a class="nav-link text-light"
-                                href="contacto.php">Contacto</a></button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/navbar.php';?>
+
 
     <div class="container mt-4">
         <div id="header" class="row py-4 d-flex justify-content-center align-items-center text-center">
@@ -57,8 +29,8 @@
                     <h1 class="display-1">Wonderland</h1>
                 </div>
                 <h2>Como en la montaña, pero en la ciudad.</h2>
-                <button type="button" class="btn btn-dark mt-3 py-4 px-3"><a class="nav-link text-light btn-custom"
-                        href="productos.php">Ver
+                <button type="button" class="btn btn-primary mt-3 py-4 px-3">
+                    <a class="nav-link text-light" href="productos.php">Ver
                         menú</a></button>
             </div>
         </div>

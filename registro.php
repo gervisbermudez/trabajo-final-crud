@@ -4,79 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiénes somos</title>
-
-    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Registrase</title>
+    <!-- Incluye el CSS de Bootstrap -->
     <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
+
 </head>
 
 <body>
-
     <?php include 'includes/navbar.php';?>
-
-    <div class="container">
-        <div class="row py-4">
-            <div class="d-block">
-                <div id="contacto" class="row d-flex align-items-center d-block">
-                    <h1 class="display-1 py-2 text-center">Contáctanos</h1>
-                </div>
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <form class="row g-3 needs-validation" novalidate>
-                    <div class="form-group">
-                        <label for="validationCustom01" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="validationCustom01" required
-                            placeholder="Ingresa tu nombre">
-                        <div class="valid-feedback">
-                            ¡Se ve bien!
-                        </div>
-                        <div class="invalid-feedback">
-                            Por favor, dejanos tu nombre.
-                        </div>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Registrate en Wonderland para continuar</h1>
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <form action="registro_cliente.php" method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
-                    <div class="form-group">
-                        <label for="validationCustom02" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="validationCustom02" required
-                            placeholder="Ingresa tu email">
-                        <div class="valid-feedback">
-                            ¡Se ve bien!
-                        </div>
-                        <div class="invalid-feedback">
-                            Por favor, proporciona un correo electrónico válido.
-                        </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
                     </div>
-                    <div class="form-group">
-                        <label for="validationCustom03" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="validationCustom03" required rows="4"
-                            placeholder="Ingresa tu mensaje"></textarea>
-                        <div class="valid-feedback">
-                            ¡Gracias por tu mensaje!
-                        </div>
-                        <div class="invalid-feedback">
-                            Por favor, dejanos un mensaje.
-                        </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <div>
-                        <p>Todos los campos son obligatorios.</p>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">
-                                Quiero recibir novedades y promociones.
-                            </label>
-                        </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" required>
                     </div>
-                    <!--<div class="py-2"><button type="submit" class="btn btn-dark col-2"><a class="nav-link text-light"                          href="mailto:wonderland_casadete@gmail.com">Enviar</a></button></div>-->
-                    <div class="col-12">
-                        <button class="btn btn-dark text-light" type="submit">Enviar formulario</button>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
                     </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <div class="container-fluid">
+    <div class="container-fluid pt-4">
         <div class="row d-flex bg-light py-4">
             <footer class="col-12 justify-content-center align-items-center text-center">
                 <div class="col-12 justify-content-center">
@@ -128,9 +99,10 @@
         </div>
     </div>
 
-    <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/public/vendors/jquery-3.7.1.min.js"></script>
-    <script src="/public/js/scripts.js"></script>
+    <!-- Incluye el JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
