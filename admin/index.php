@@ -1,250 +1,128 @@
+<?php
+// Verifica si el administrador ha iniciado sesión, aquí puedes agregar tu lógica de sesión
+session_start();
+
+// Si no hay sesión de administrador activa, redirige a una página de login
+// Aquí puedes implementar una página de inicio de sesión y gestionar sesiones de administrador.
+// Ejemplo: si no hay sesión activa, redirigiría a "login.php"
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: /admin/login.php');
+    exit;
+}
+
+$title = "Wonderland - Admin";
+
+include './includes/config.php';
+
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+<?php
+include "./includes/head.php";
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonderland</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="vendors/jquery_owl.carrusel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendors/jquery_owl.carrusel/dist/assets/owl.theme.default.min.css">
-    <link href="vendors/jquery_accordion/css/jquery.beefup.css" rel="plugin_accordion">
-    <link rel="css_smartcart" href="vendors/jquery_smart.cart/css/smart_cart.min.css">
-    <link rel="stylesheet" href="vendors/plugin_flipster/jquery.flipster.min.css">
-    <link rel="stylesheet" href="vendors/jquery_whatsapp/css/floating-wpp.min.css">
-
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid align-items-center">
-            <a class="navbar-brand" href="index.html"><img src="img/logo_wonderland.png" alt="logo de la web"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Sucursales">Sucursales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=../web/productos.html">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.html">Quiénes somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FAQ.html">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-dark"><a class="nav-link text-light"
-                                href="contacto.html">Contacto</a></button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
-        <div id="header" class="row py-4 d-flex justify-content-center align-items-center text-center">
-            <div>
-                <div id="wonderland">
-                    <h1 class="display-1">Wonderland</h1>
-                </div>
-                <h2>Como en la montaña, pero en la ciudad.</h2>
-                <button type="button" class="btn btn-dark mt-3 py-4 px-3"><a class="nav-link text-light btn-custom" href="../web/productos.html">Ver
-                        menú</a></button>
-            </div>
-        </div>
-
-        <div class="row align-items-center py-4">
-            <h3 id="Sucursales">Sucursales</h3>
-            <div class="col-12 col-sm-6">
-                <div class="card shadow-sm mb-5 mt-5">
-                    <img src="img/sucursal_1.jpg" class="card-img-top img-fluid" alt="Sucursal Recoleta">
-                    <div class="card-body">
-                        <h5>Wonderland - Recoleta</h5>
-                        <p class="card-text">Av. Figueroa Alcorta 2544, C.A.B.A.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-                <div class="card shadow-sm mb-2">
-                    <img src="img/sucursal_2.jpg" class="card-img-top img-fluid" alt="Sucursal Palermo">
-                    <div class="card-body">
-                        <h5>Wonderland - Palermo</h5>
-                        <p class="card-text">Honduras 1423, C.A.B.A.</p>
-                    </div>
-                </div>
-
-                <div class="card shadow-sm mb-2">
-                    <img src="img/sucursal_3.jpg" class="card-img-top img-fluid" alt="Sucursal Villa Crespo">
-                    <div class="card-body">
-                        <h5>Wonderland - Villa Crespo</h5>
-                        <p class="card-text">Juan Ramírez de Velasco 701, C.A.B.A.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row py-4 mb-3 justify-content-center">
-            <h3>Nuestras meriendas</h3>
-
-            <div class="owl-carousel owl-theme">
-                <div> <img src="img/merienda5.jpg" class="d-block w-100"
-                        alt="Imagen de merienda buffet para compartir.">
-                </div>
-                <div> <img src="img/merienda1.jpg" class="d-block w-100" alt="Te con pastries.">
-                </div>
-                <div> <img src="img/merienda6.jpg" class="d-block w-100" alt="Opciones saladas."></div>
-                <div> <img src="img/merienda8.jpg" class="d-block w-100" alt="Opciones dulces y saladas."> </div>
-                <div> <img src="img/merienda7.jpg" class="d-block w-100" alt="Bocaditos, parte de la merienda buffet.">
-                </div>
-                <div> <img src="img/merienda9.jpg" class="d-block w-100" alt="Foto de masas rellenas.">
-                </div>
-            </div>
-
-
-
-            <div class="row py-4">
-                <h3>Testimonios</h3>
-                <div id="coverflow" class="col-12">
-                    <ul class="flip-items">
-                        <li data-flip-title="Paula Schenn">
-                            <div class="card shadow-sm text-dark bg-light mb-3">
-                                <div class="card-header">
-                                    <img src="img/cliente_1.png" class="card-img-top" alt="Chica sonriente">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">"Me encantó"</h5>
-                                    <p class="card-text">"El mejor lugar para tomar el té en la ciudad."</p>
+<body class="sb-nav-fixed">
+    <?php include "./includes/nav.php";?>
+    <div id="layoutSidenav">
+        <?php include "./includes/sidemenu.php";?>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Inicio</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Bienvenido al Panel de Administración</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">Pedidos</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="vistas/pedidos.php">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
-                        </li>
-                        <li data-flip-title="Tina Bloom">
-                            <div class="card shadow-sm text-dark bg-light mb-3">
-                                <div class="card-header">
-                                    <img src="img/cliente_2-01.png" class="card-img-top" alt="Chica sonriente">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">"¡Lo amé!"</h5>
-                                    <p class="card-text">"Fuimos a tomar el té con amigas y la experiencia es
-                                        inmejorable ¡Lo super recomiendo!"</p>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-warning text-white mb-4">
+                                <div class="card-body">Clientes</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="vistas/clientes.php">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
-                        </li>
-                        <li data-flip-title="Peter Parker">
-                            <div class="card shadow-sm text-dark bg-light mb-3">
-                                <div class="card-header">
-                                    <img src="img/cliente_3-01.png" class="card-img-top" alt="Chico sonriendo">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">"Recomiendo"</h5>
-                                    <p class="card-text">"La atención es muy buena y la pastelería es exquisita."</p>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-success text-white mb-4">
+                                <div class="card-body">Productos</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="vistas/productos.php">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Clientes
+                                </div>
+                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Productos Vendidos
+                                </div>
+                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Ultimos Pedidos
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cliente</th>
+                                        <th>Take away o delivery?</th>
+                                        <th>Dirección</th>
+                                        <th>Estado del pedido</th>
+                                        <th>Precio</th>
+                                        <th>Contacto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php include './includes/pedidos/leer_pedido.php';?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                          
-            </div>
-
-        </div>
-    </div>
-
-
-    <!--Plugin Whatsapp-->
-    <div class="floating-wpp"></div>
-
-
-
-    <div class="container-fluid">
-        <div class="row d-flex bg-light py-4">
-            <footer class="col-12 justify-content-center align-items-center text-center">
-                <div class="col-12 justify-content-center">
-                    <p>&copy; Wonderland</p>
-                </div>
-                <div class="col-12 justify-content-center">
-                    <p>Milena Gómez, Olivia Loffreda y Romina Sosa. 1°B. Programación & Desarrollo II</p>
-                </div>
-
-                <div class="col-12 justify-content-center">
-                    <a href="https://www.instagram.com/"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
-                        </svg>
-                    </a>
-
-                    <a href="https://www.google.com/intl/es-419/gmail/about/"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                            <path
-                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-                        </svg>
-                    </a>
-
-                    <a href="https://ar.linkedin.com/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-                            <path
-                                d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
-                        </svg>
-                    </a>
-
-                    <a href="https://web.whatsapp.com/"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-                            <path
-                                d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
-                        </svg>
-                    </a>
-
-                    <a href="https://www.facebook.com/?locale=es_LA"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                            height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                            <path
-                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
-                        </svg>
-                    </a>
-
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Wonderlan 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
                 </div>
             </footer>
-
         </div>
     </div>
-
-
-
-
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
-
-    <!--jQuery-->
-    <script src="vendors/jquery-3.7.1.min.js"></script>
-
-    <!--Plugin SmartCart-->
-    <script src="vendors/jquery_smart.cart/js/jquery.smartCart.min.js"></script>
-
-    <!--Plugin Carrusel automatico-->
-    <script src="vendors/jquery_owl.carrusel/dist/owl.carousel.js"></script>
-
-    <!--Plugin flip-->
-    <script src="vendors/plugin_flipster/jquery.flipster.min.js"></script>
-
-    <!--Plugin Accordion-->
-    <script src='vendors/jquery_accordion/js/jquery.beefup.min.js'> </script>
-
-    <!--Plugin Whatsapp-->
-    <script src="vendors/jquery_whatsapp/js/floating-wpp.min.js"></script>
-
-    <!--Js Productos-->
-    <script src="js/productos.js"></script>
-
-    <!--Scripts-->
-    <script src="js/scripts.js"></script>
-
-
+    <?php include "./includes/scripts.php";?>
 </body>
 
 </html>

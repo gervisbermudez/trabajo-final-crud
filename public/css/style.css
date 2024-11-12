@@ -1,0 +1,181 @@
+body {
+    font-family: Arial, Helvetica, sans-serif !important;
+    padding-top: 70px;
+}
+
+@media (min-width: 768px) {
+    #header {
+        background-image: url('/public/img/header.png');
+        background-size: cover;
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #wonderland {
+        font-weight: 800;
+        color: #C76076;
+    }
+}
+
+.navbar-brand {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    font-weight: 500;
+
+}
+
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+h3 {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    font-weight: 800 !important;
+}
+
+h5 {
+    color: #C76076 !important;
+}
+
+h6 {
+    font-weight: 600 !important;
+    color: #C76076 !important;
+}
+
+a {
+    color: #C76076 !important;
+    text-decoration: none !important;
+}
+
+.pink {
+    color: #C76076 !important;
+}
+
+a.btn-custom {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.btn-primary {
+    background-color: #C76076 !important;
+    border-color: #C76076;
+}
+
+.btn-primary:hover {
+    background-color: #e494a5 !important;
+    border-color: #e494a5;
+}
+
+@media (min-width: 768px) {
+    #quienes_somos {
+        background-image: url('public/img/Banner_quienes_somos.jpg');
+        background-size: cover;
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #FAQ {
+        background-image: url('/public/img/banner_FAQ.jpg');
+        background-size: cover;
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #contacto {
+        background-image: url('/public/img/banner_contacto.jpg');
+        background-size: cover;
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #tienda {
+        background-image: url('/public/img/banner_tienda.jpg');
+        background-size: cover;
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 250px !important;
+    }
+}
+
+#container {
+    background-color: #FFFFFF !important;
+}
+
+.form-group {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    font-weight: lighter;
+}
+
+.form-check {
+    font-weight: lighter;
+}
+
+/*acordeon*/
+
+.beefup-head {
+    cursor: pointer;
+    position: relative;
+}
+
+.beefup-head:after {
+    border-style: solid;
+    border-width: 12px 12px 0 12px;
+    border-color: #ddd transparent transparent transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 0;
+    margin-top: -6px;
+    top: 50%;
+    width: 0;
+}
+
+.open>.beefup-head:after {
+    border-width: 0 12px 12px 12px;
+    border-color: transparent transparent #ddd transparent;
+}
+
+#coverflow {
+    max-width: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+#coverflow .flip-items li {
+    width: 300px;
+    height: 450px;
+    overflow: hidden;
+}
+
+
+#coverflow .flip-items li .card {
+    font-size: 10px;
+}
+
+.custom-carousel {
+    width: 500px;
+}
+
+.custom-carousel .carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
